@@ -47,6 +47,7 @@ namespace Forum_v1.Controllers
         // POST: Categories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CategoryID,Title")] Category category)
@@ -62,6 +63,7 @@ namespace Forum_v1.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -81,6 +83,7 @@ namespace Forum_v1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind(Include = "CategoryID,Title")] Category category)
         {
             if (ModelState.IsValid)
@@ -93,6 +96,7 @@ namespace Forum_v1.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -108,6 +112,7 @@ namespace Forum_v1.Controllers
         }
 
         // POST: Categories/Delete/5
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

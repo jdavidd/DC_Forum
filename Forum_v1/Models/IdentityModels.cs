@@ -1,6 +1,8 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -20,6 +22,7 @@ namespace Forum_v1.Models
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+        public IEnumerable<SelectListItem> AllRoles { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

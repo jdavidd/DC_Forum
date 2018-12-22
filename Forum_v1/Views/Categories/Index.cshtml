@@ -9,25 +9,21 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CategoryID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CategoryID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CategoryID })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="container-fluid">
+    @foreach (var item in Model)
+    {       
+        <div class="row">
+            <div class="col-sm">
+                  @Html.DisplayFor(modelItem => item.Title)
+            </div>
+            <div class="col-sm">
+                @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) 
+                @if (this.User.IsInRole("Administrator"))
+                { 
+                     @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) 
+                     @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+                }
+            </div>
+        </div>
+     }
+</div>
