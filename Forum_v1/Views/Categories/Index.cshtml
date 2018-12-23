@@ -4,26 +4,30 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (this.User.IsInRole("Administrator"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 <div class="container-fluid">
     @foreach (var item in Model)
-    {       
+    {
         <div class="row">
-            <div class="col-sm">
-                  @Html.DisplayFor(modelItem => item.Title)
-            </div>
-            <div class="col-sm">
-                @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) 
+            <div class="col-lg-4">
+                <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
+
+                 <p>@Html.ActionLink("Details", "Details", new { id = item.CategoryID }) </p>
                 @if (this.User.IsInRole("Administrator"))
-                { 
-                     @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) 
-                     @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+                {
+                   <p> @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID })</p> 
+                   <p> @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID }) </p>
                 }
             </div>
+            <div class="col-lg-4">
+            </div>
+            <div class="col-lg-4">
+            </div>
         </div>
-     }
+    }
 </div>

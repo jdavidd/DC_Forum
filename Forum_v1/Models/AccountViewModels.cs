@@ -80,8 +80,15 @@ namespace Forum_v1.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        [Required]
         public string Adress { get; set; }
+        [Required]
         public string City { get; set; }
+        [Required]
         public string State { get; set; }
     }
 
