@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Forum_v1.Models.UserEdit>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@if (TempData.ContainsKey("message"))
+{
+    <h3 class="alert alert-info" role="alert">@ViewBag.message</h3>
+}
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-4">
+                <p>@ViewBag.UserEdit.Email</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <p>@ViewBag.UserEdit.FirstName</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <p>@ViewBag.UserEdit.LastName</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <p>@ViewBag.UserEdit.Adress</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <p>@ViewBag.UserEdit.City</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <p>@ViewBag.UserEdit.State</p>
+            </div>
+        </div>
+    </div>
+

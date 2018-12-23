@@ -1,0 +1,67 @@
+﻿@model Forum_v1.Models.UserEdit
+@{
+    ViewBag.Title = "Edit Profile";
+}
+
+<form method="post" action="/UserEdit/Edit">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                @Html.Label("FirstName", "First Name")
+            </div>
+            <div class="col-md-3">
+                @Html.EditorFor(m => m.FirstName)
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(model => model.FirstName, null, new { @class = "text-danger " })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                @Html.Label("LastName", "Last Name")
+            </div>
+            <div class="col-md-3">
+                @Html.EditorFor(m => m.LastName)
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(model => model.LastName, null, new { @class = "text-danger " })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                @Html.Label("Adress", "Adress")
+            </div>
+            <div class="col-md-3">
+                @Html.EditorFor(m => m.Adress)
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(model => model.Adress, null, new { @class = "text-danger " })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                @Html.Label("City", "Citty")
+            </div>
+            <div class="col-md-3">
+                @Html.EditorFor(m => m.City)
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(model => model.City, null, new { @class = "text-danger " })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                @Html.Label("State", "State")
+            </div>
+            <div class="col-md-3">
+                @Html.EditorFor(m => m.State)
+            </div>
+            <div class="col-md-3">
+                @Html.ValidationMessageFor(model => model.State, null, new { @class = "text-danger " })
+            </div>
+        </div>
+        <button class="btn btn-sm btn-success" type="submit">Modifica aceasta categorie</button>
+    </div>
+</form>
+

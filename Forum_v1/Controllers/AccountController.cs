@@ -152,7 +152,9 @@ namespace Forum_v1.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                user.Address = model.Adress;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Adress = model.Adress;
                 user.State = model.State;
                 user.City = model.City;
 

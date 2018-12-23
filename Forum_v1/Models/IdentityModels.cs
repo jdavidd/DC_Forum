@@ -25,11 +25,12 @@ namespace Forum_v1.Models
         [Required]
         public string LastName { get; set; }
         [Required]
-        public string Address { get; set; }
+        public string Adress { get; set; }
         [Required]
         public string City { get; set; }
         [Required]
         public string State { get; set; }
+
         public IEnumerable<SelectListItem> AllRoles { get; set; }
     }
 

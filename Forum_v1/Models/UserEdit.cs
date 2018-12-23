@@ -13,7 +13,7 @@ namespace Forum_v1.Models
 
         [Required]
         [Display(Name = "First Name")]
-        public string FristName { get; set; }
+        public string FirstName { get; set; }
 
         [Required]
         [Display(Name = "Last Name")]

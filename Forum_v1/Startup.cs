@@ -33,7 +33,12 @@ namespace Forum_v1
                 var user = new ApplicationUser();
                 user.UserName = "admin@admin.com";
                 user.Email ="admin@admin.com";
-                 var adminCreated = UserManager.Create(user,"Administrator1!");
+                user.FirstName = "David";
+                user.LastName = "Jitca";
+                user.Adress = "ad s";
+                user.City = "Bucuresti";
+                user.State = "Romania";
+                var adminCreated = UserManager.Create(user,"Admin1.");
                  if(adminCreated.Succeeded)
                  {
                       UserManager.AddToRole(user.Id,"Administrator");
