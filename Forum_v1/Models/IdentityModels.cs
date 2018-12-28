@@ -31,6 +31,8 @@ namespace Forum_v1.Models
         [Required]
         public string State { get; set; }
 
+        public byte[] UserPhoto { get; set; }
+
         public IEnumerable<SelectListItem> AllRoles { get; set; }
     }
 

@@ -31,5 +31,7 @@ namespace Forum_v1.Models
         [Display(Name = "State")]
         public string State { get; set; }
 
+        public byte[] UserPhoto { get; set; }
+
     }
 }

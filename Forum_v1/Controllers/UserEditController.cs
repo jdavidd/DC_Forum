@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -20,19 +21,20 @@ namespace Forum_v1.Controllers
             ApplicationUser UserE = context.Users.FirstOrDefault(x => x.Id == userId);
             UserEdit NewUser = new UserEdit();
 
-            NewUser.FirstName = UserE.FirstName;
+            NewUser.Email = UserE.Email;
             NewUser.FirstName = UserE.FirstName;
             NewUser.LastName = UserE.LastName;
             NewUser.Adress = UserE.Adress;
             NewUser.City = UserE.City;
             NewUser.State = UserE.State;
-            ViewBag.UserEdit = NewUser;
+            NewUser.UserPhoto = UserE.UserPhoto;
+
             if (TempData.ContainsKey("message"))
             {
                 ViewBag.message = TempData["message"].ToString();
             }
 
-            return View();
+            return View(NewUser);
         }
 
         public ActionResult Edit()
@@ -40,23 +42,35 @@ namespace Forum_v1.Controllers
             string userId = User.Identity.GetUserId();
             ApplicationUser UserE = context.Users.FirstOrDefault(x => x.Id == userId);
             UserEdit NewUser = new UserEdit();
+            NewUser.Email = UserE.Email;
             NewUser.FirstName = UserE.FirstName;
             NewUser.LastName = UserE.LastName;
             NewUser.Adress = UserE.Adress;
             NewUser.City = UserE.City;
             NewUser.State = UserE.State;
-           
+            NewUser.UserPhoto = UserE.UserPhoto;
             return View(NewUser);
         }
         [HttpPut]
-        public async Task<ActionResult> Edit(UserEdit model)
+        public ActionResult Edit([Bind(Exclude = "UserPhoto")] UserEdit model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    byte[] imageData = null;
+                    if (Request.Files.Count > 0)
+                    {
+                        HttpPostedFileBase poImgFile = Request.Files["UserPhoto"];
+                            using (var binary = new BinaryReader(poImgFile.InputStream))
+
+                            {
+                                imageData = binary.ReadBytes(poImgFile.ContentLength);
+                            }
+                    }
                     string userId = User.Identity.GetUserId();
                     ApplicationUser UserEdited = context.Users.FirstOrDefault(x => x.Id == userId);
+                    /*
                     if (TryUpdateModel(UserEdited))
                     {
                         UserEdited.FirstName = model.FirstName;
@@ -64,9 +78,20 @@ namespace Forum_v1.Controllers
                         UserEdited.Adress = model.Adress;
                         UserEdited.City = model.City;
                         UserEdited.State = model.State;
+                        UserEdited.UserPhoto = imageData;
                         context.SaveChanges();
                         TempData["message"] = "Profilul a fost editat!";
                     }
+                   */
+                    UserEdited.FirstName = model.FirstName;
+                    UserEdited.LastName = model.LastName;
+                    UserEdited.Adress = model.Adress;
+                    UserEdited.City = model.City;
+                    UserEdited.State = model.State;
+                    if (imageData != null && imageData.Length > 0)
+                        UserEdited.UserPhoto = imageData;
+                    context.SaveChanges();
+                    TempData["message"] = "Profilul a fost editat!";
                     return RedirectToAction("Index");
 
                 }

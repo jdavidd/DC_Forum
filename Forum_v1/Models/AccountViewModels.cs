@@ -81,7 +81,10 @@ namespace Forum_v1.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
         [Required]
         public string LastName { get; set; }
         [Required]
@@ -90,6 +93,9 @@ namespace Forum_v1.Models
         public string City { get; set; }
         [Required]
         public string State { get; set; }
+
+        [Display(Name = "UserPhoto")]
+        public byte[] UserPhoto { get; set; }
     }
 
     public class ResetPasswordViewModel
