@@ -1,0 +1,27 @@
+﻿/*body color*/
+.color {
+    background: #557dd6;
+}
+
+/*navbar color*/
+#wh {
+    background: #0f2953;
+}
+/*text color*/
+.text_color {
+    color : #0f2953;
+}
+.hr_class {
+    border-color: #4f454e;
+}
+
+#bootstrap_overides > a{
+    color: #44566c;
+}
+#bootstrap_overrides > a:hover {
+    color: #4b5e65;
+}
+#my_style {
+    border-radius: 25px;
+    background: #6c96db;
+}

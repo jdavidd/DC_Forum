@@ -10,6 +10,7 @@ namespace Forum_v1.Models
     {
         public int CategoryID { get; set; }
         public string Title { get; set; }
+        public string[] description { get; set; }
 
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }

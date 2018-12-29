@@ -50,7 +50,7 @@ namespace Forum_v1.Controllers
 
                 var bdUsers = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
                 var userImage = bdUsers.Users.Where(x => x.Id == userId).FirstOrDefault();
-                if (userImage.UserPhoto == null)
+                if (userImage.UserPhoto == null || userImage.UserPhoto.Length <= 0)
                     return File(imageData, "image/png");
                 else
                     return new FileContentResult(userImage.UserPhoto, "image/jpeg");
