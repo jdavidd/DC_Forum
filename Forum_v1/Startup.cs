@@ -3,6 +3,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
+using System.IO;
+using System.Web;
 
 [assembly: OwinStartupAttribute(typeof(Forum_v1.Startup))]
 namespace Forum_v1
@@ -38,6 +40,17 @@ namespace Forum_v1
                 user.Adress = "ad s";
                 user.City = "Bucuresti";
                 user.State = "Romania";
+
+                string fileName = System.Web.Hosting.HostingEnvironment.MapPath(@"/Images/noImg.png");
+                byte[] imageData = null;
+                FileInfo fileInfo = new FileInfo(fileName);
+                long imageFileLength = fileInfo.Length;
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                imageData = br.ReadBytes((int)imageFileLength);
+
+                user.UserPhoto = imageData;
+
                 var adminCreated = UserManager.Create(user,"Admin1.");
                  if(adminCreated.Succeeded)
                  {

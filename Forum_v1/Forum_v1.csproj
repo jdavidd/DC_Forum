@@ -177,6 +177,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SubjectsController.cs" />
     <Compile Include="Controllers\UserEditController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -186,6 +187,8 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserEdit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -262,6 +265,8 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\UserEdit\Index.cshtml" />
     <Content Include="Views\UserEdit\Edit.cshtml" />
+    <Content Include="Views\Subjects\CreateSubjectView.cshtml" />
+    <Content Include="Views\Subjects\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

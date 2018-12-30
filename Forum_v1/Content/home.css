@@ -11,6 +11,9 @@
 .text_color {
     color : #0f2953;
 }
+.text_colorr {
+    color: #fff ;
+}
 .hr_class {
     border-color: #4f454e;
 }

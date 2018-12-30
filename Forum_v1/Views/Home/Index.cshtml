@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Forum_v1.Models.Category>
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -71,22 +72,31 @@
     </div>
 </div>
 <hr class="hr_class" />
-<div class="row text_color">
-    <div class="col-md-5">
-        <h3>
-            Nume
-        </h3>
-        <p>
-            description
-        </p>
+
+@foreach (var item in Model)
+{
+    <div class="row text_color">
+        <div class="col-md-5">
+            <h3>
+                @Html.DisplayFor(modelItem => item.Title)
+            </h3>
+            <p>
+                @Html.DisplayFor(modelItem => item.Description)
+            </p>
+            @if (this.User.IsInRole("Administrator"))
+            {
+                <p> @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID })</p>
+                <p> @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID }) </p>
+            }
+        </div>
+        <div class="col-md-2">
+            <p>
+                NR topics
+            </p>
+        </div>
+        <div class="col-md-5">
+            <h3> last subject</h3>
+            <p>by usename</p>
+        </div>
     </div>
-    <div class="col-md-2">
-        <p>
-            NR topics
-        </p>
-    </div>
-    <div class="col-md-5">
-        <h3> last subject</h3>
-        <p>by usename</p>
-    </div>
-</div>
+}

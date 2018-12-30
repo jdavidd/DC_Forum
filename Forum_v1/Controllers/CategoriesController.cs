@@ -50,7 +50,7 @@ namespace Forum_v1.Controllers
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryID,Title")] Category category)
+        public ActionResult Create([Bind(Include = "CategoryID,Title,Description")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +84,7 @@ namespace Forum_v1.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public ActionResult Edit([Bind(Include = "CategoryID,Title")] Category category)
+        public ActionResult Edit([Bind(Include = "CategoryID,Title,Description")] Category category)
         {
             if (ModelState.IsValid)
             {

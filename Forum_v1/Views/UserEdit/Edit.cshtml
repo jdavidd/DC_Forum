@@ -3,8 +3,7 @@
     ViewBag.Title = "Edit Profile";
 }
 
-<hr>
-<div class="row">
+<div class="row" style="margin-top:10px">
     <div class="col-sm-10"><h1>@Html.DisplayFor(m => m.Email)</h1></div>
     <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>
 </div>
@@ -15,18 +14,24 @@
 
         <div class="text-center">
             <img src="@Url.Action("UserPhotos","Home")" class="avatar img-circle img-thumbnail" alt="avatar">
-            <h6>Upload a different photo...</h6>
-            <input type="file" class="text-center center-block file-upload" name="UserPhoto" id="fileUpload" accept=".png,.jpg,.gif,.tif" />
         </div><br>
-
-
         <div class="panel panel-default">
-            <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
-            <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div>
+            <div class="panel-heading" id="wh">
+                <p class="text_colorr"> Website</p>
+            </div>
+            <div class="panel-body">
+            <a href="http://bootnipets.com">
+                bootnipets.com
+            </a>
+            </div>
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">Social Media</div>
+            <div class="panel-heading" id="wh"> 
+                <p class="text_colorr">
+                    Social Media
+                </p>
+            </div>
             <div class="panel-body">
                 <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
             </div>
@@ -35,13 +40,12 @@
     </div><!--/col-3-->
     <div class="col-sm-9">
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+            <li class="active"><a data-toggle="tab" style="color:#fff" id="wh" href="#home">Home</a></li>
         </ul>
 
 
         <div class="tab-content">
             <div class="tab-pane active" id="home">
-                <hr>
                 <form class="form" action="/UserEdit/Edit" method="post" id="registrationForm" enctype = "multipart/form-data">
                     @Html.HttpMethodOverride(HttpVerbs.Put)
                     <div class="form-group">
@@ -95,9 +99,10 @@
                     <div class="form-group">
                         <div class="col-xs-12">
                             <br>
-                            <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                            <button class="btn btn-lg text_colorr" id="wh" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
                         </div>
                     </div>
+                    <hr class="hr_class" />
                 </form>
 
                 <hr>

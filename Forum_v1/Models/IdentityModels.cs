@@ -44,7 +44,8 @@ namespace Forum_v1.Models
         }
 
         public DbSet <Category> Categories { get; set; }
-
+        public DbSet <Subject> Subjects { get; set; }
+        public DbSet <Message> Messages { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

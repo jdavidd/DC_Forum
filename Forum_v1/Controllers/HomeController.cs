@@ -12,9 +12,11 @@ namespace Forum_v1.Controllers
 {
     public class HomeController : Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            return View();
+            
+            return View(db.Categories.ToList());
         }
 
         public ActionResult About()
