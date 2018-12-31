@@ -1,15 +1,32 @@
-﻿/*body color*/
+﻿/*body color albastru*/
 .color {
-    background: #557dd6;
+    background: #22223a;
 }
-
-/*navbar color*/
+/*link color albastru*/
+#link {
+    color: #22223a;
+}
+.link:hover{
+    color: #fff;
+}
+/*navbar color caramiziu*/
 #wh {
-    background: #0f2953;
+    background: #d56c2c;
 }
-/*text color*/
+/*text color caramiziu*/
 .text_color {
-    color : #0f2953;
+    color: #d56c2c;
+}
+.text_color2 {
+    color: #22223a;
+}
+.description {
+    color: #d5972c;
+}
+/*subject color portocaliu*/
+#my_style {
+    border-radius: 25px;
+    background: #d5972c;
 }
 .text_colorr {
     color: #fff ;
@@ -23,8 +40,4 @@
 }
 #bootstrap_overrides > a:hover {
     color: #4b5e65;
-}
-#my_style {
-    border-radius: 25px;
-    background: #6c96db;
 }

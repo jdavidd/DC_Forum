@@ -5,7 +5,9 @@
 @if (this.User.IsInRole("Administrator"))
 {
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @{
+            @Html.ActionLink("Creaza Subiect Nou", "Create", "Subjects", new { id = ViewBag.CategoryID }, null)
+        }
     </p>
 }
 <div class="container-fluid">
@@ -15,11 +17,13 @@
             <div class="col-lg-4">
                 <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
                 <h4>@Html.DisplayFor(modelItem => item.Description)</h4>
-                <p>@Html.ActionLink("Details", "Details", new { id = item.CategoryID }) </p>
-                @if (this.User.IsInRole("Administrator"))
+                <h4>Creat de @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)</h4>
+                <h4>La data: @Html.DisplayFor(modelItem => item.Date)</h4>
+                <p>@Html.ActionLink("Details", "Details", new { id = item.SubjectId }) </p>
+                @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Moderator") || this.User.IsInRole("User"))
                 {
-                    <p> @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID })</p>
-                    <p> @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID }) </p>
+                    <p> @Html.ActionLink("Edit", "Edit", new { id = item.SubjectId })</p>
+                    <p> @Html.ActionLink("Delete", "Delete", new { id = item.SubjectId }) </p>
                 }
             </div>
             <div class="col-lg-4">

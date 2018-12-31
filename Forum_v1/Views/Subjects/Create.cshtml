@@ -17,15 +17,14 @@
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "Introdu Titlu", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "Introdu Descriere", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
 
-                <p>@ViewBag.CategoryID</p>
-                <input type="hidden" name="StudentId" value="@ViewBag.StudentId" />
+                <input type="hidden" name="CategoryID" value="@ViewBag.CategoryID" />
 
             </div>
         </div>

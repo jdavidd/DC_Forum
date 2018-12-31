@@ -15,10 +15,10 @@
 {
     <div class="row text_color">
         <div class="col-md-5">
-            <h3>
-                @Html.DisplayFor(modelItem => item.Title)
+            <h3 >
+                @Html.ActionLink(item.Title, "Index", "Subjects", new {id = item.CategoryID}, new { @class="text_color"})
             </h3>
-            <p>
+            <p class="description">
                 @Html.DisplayFor(modelItem => item.Description)
             </p>
             @if (this.User.IsInRole("Administrator"))

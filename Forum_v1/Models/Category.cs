@@ -14,6 +14,7 @@ namespace Forum_v1.Models
 
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
+        public virtual ICollection<Subject> Subjects { get; set; }
 
     }
 

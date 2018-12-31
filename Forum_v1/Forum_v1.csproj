@@ -265,8 +265,9 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\UserEdit\Index.cshtml" />
     <Content Include="Views\UserEdit\Edit.cshtml" />
-    <Content Include="Views\Subjects\CreateSubjectView.cshtml" />
+    <Content Include="Views\Subjects\Create.cshtml" />
     <Content Include="Views\Subjects\Index.cshtml" />
+    <Content Include="Views\Subjects\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

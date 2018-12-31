@@ -19,7 +19,7 @@ namespace Forum_v1.Models
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
-        public int CategoryID { get; set; }
+        public int CategoryID{ get; set; }
         public Category Category { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
     }
