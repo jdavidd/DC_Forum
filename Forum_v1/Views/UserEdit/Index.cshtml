@@ -9,7 +9,7 @@
 }
 
 <div class="row" style="margin-top:10px">
-    <div class="col-sm-10"><h3>@Html.DisplayFor(m => m.Email)</h3></div>
+    <div class="col-sm-10 text_color"><h3>@Html.DisplayFor(m => m.Email)</h3></div>
     <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>
 </div>
 <div class="row">
@@ -49,31 +49,31 @@
         <div class="tab-content">
             <div class="tab-pane active" id="home">
                         <div class="col-xs-6">
-                           <h3> @Html.Label("FirstName", "First Name") </h3>
+                           <h4 class="text_color"> @Html.Label("FirstName", "First Name") </h4>
                            <p class="text_colorr"> @Html.DisplayFor(m => m.FirstName) </p>
                         </div>
                     
                     
                         <div class="col-xs-6">
-                          <h3>  @Html.Label("LastName", "Last Name") </h3>
+                          <h4 class="text_color">  @Html.Label("LastName", "Last Name") </h4>
 
                           <p class="text_colorr">@Html.DisplayFor(m => m.LastName)</p>
                         </div>
                     
                     
                         <div class="col-xs-6">
-                            <h3> @Html.Label("Adress", "Adress") </h3>
+                            <h4 class="text_color"> @Html.Label("Adress", "Adress") </h4>
                             <p class="text_colorr"> @Html.DisplayFor(m => m.Adress)</p>
                         </div>
                     
                  
                         <div class="col-xs-6">
-                            <h3> @Html.Label("City", "City") </h3>
+                            <h4 class="text_color"> @Html.Label("City", "City") </h4>
                             <p class="text_colorr"> @Html.DisplayFor(m => m.City)</p>
                         </div>
                    
                         <div class="col-xs-6">
-                            <h3>  @Html.Label("State", "State") </h3>
+                            <h4 class="text_color">  @Html.Label("State", "State") </h4>
                            <p class="text_colorr"> @Html.DisplayFor(m => m.State) </p>
                         </div>
                     

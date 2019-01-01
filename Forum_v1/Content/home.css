@@ -6,6 +6,9 @@
 #link {
     color: #22223a;
 }
+.colorr {
+    color: #22223a;
+}
 .link:hover{
     color: #fff;
 }
@@ -28,11 +31,21 @@
     border-radius: 25px;
     background: #d5972c;
 }
+.button_link {
+    background: #d5972c;
+    position:absolute;
+    width:100px;
+    height:40px;;
+    padding:15px;
+    padding-top:10px;
+    left: 50%;
+    top: 30px;
+}
 .text_colorr {
     color: #fff ;
 }
 .hr_class {
-    border-color: #4f454e;
+    border-color: #d56c2c;
 }
 
 #bootstrap_overides > a{

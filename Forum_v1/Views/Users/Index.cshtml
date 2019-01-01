@@ -1,16 +1,15 @@
 ﻿@model  Forum_v1.Models.ApplicationUser
 
 @{
-    ViewBag.Title = "Afisare  utilizatori";
+    ViewBag.Title = "Utilizatori";
 }
+a
+ <h3 class="text_color">@ViewBag.Title</h3>
 
-<ol class="breadcrumb">
-    <li><h3>@ViewBag.Title</h3></li>
-</ol>
 @foreach (var user in ViewBag.UserList)
-{  <div class="panel-heading">Nume utilizator: @user.UserName</div>
-    <div class="panel-body">
-        <i class="glyphicon glyphicon-envelope" ></i> Email utilizator: <span class="label label-default">@user.Email</span>
+{  <div class="panel-heading text_color">Nume utilizator: @user.UserName</div>
+    <div class="panel-body text_color">
+        <i class="glyphicon glyphicon-envelope text_color" ></i> Email utilizator: <span class="label label-default">@user.Email</span>
         <br/><br/>
         @if(@user.PhoneNumber != null)
         {
@@ -18,9 +17,8 @@
         }
 
     </div>
-    <div class="panel-footer">
+    <div class="">
         <a class="btn btn-sm btn-success" href="/Users/Edit/@user.Id">Afisare utilizator</a>
- 
     </div>
     <br/> <br/>
 }

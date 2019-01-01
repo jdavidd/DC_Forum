@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
-@if (this.User.IsInRole("Administrator"))
+@if (this.User.IsInRole("Administrator") || this.User.IsInRole("User") || this.User.IsInRole("Moderator"))
 {
     <p>
         @{
@@ -10,26 +10,57 @@
         }
     </p>
 }
-<div class="container-fluid">
-    @foreach (var item in Model)
-    {
-        <div class="row">
-            <div class="col-lg-4">
-                <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
-                <h4>@Html.DisplayFor(modelItem => item.Description)</h4>
-                <h4>Creat de @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)</h4>
-                <h4>La data: @Html.DisplayFor(modelItem => item.Date)</h4>
-                <p>@Html.ActionLink("Details", "Details", new { id = item.SubjectId }) </p>
-                @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Moderator") || this.User.IsInRole("User"))
-                {
-                    <p> @Html.ActionLink("Edit", "Edit", new { id = item.SubjectId })</p>
-                    <p> @Html.ActionLink("Delete", "Delete", new { id = item.SubjectId }) </p>
-                }
+    <div class="container-fluid">
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col-md-4 column">
+                    <h1 class="text_color" style="margin:0px">@Html.DisplayFor(modelItem => item.Title)</h1>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Moderator") || this.User.IsInRole("User"))
+                            {
+                                <p> @Html.ActionLink("Delete", "Delete", new { id = item.SubjectId }) </p>
+                            }
+                        </div>
+                        <div class="col-xs-2">
+                            @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Moderator") || this.User.IsInRole("User"))
+                            {
+                                <p class="description"> @Html.ActionLink("Edit", "Edit", new { id = item.SubjectId })</p>
+                            }
+                        </div>
+                    </div>
+                    <h4 class="description">@Html.DisplayFor(modelItem => item.Description)</h4>
+                </div>
+                <div class="col-md-4 column">
+                    <h4 class="description">Creat de @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)</h4>
+                    <h4 class="description">La data: @Html.DisplayFor(modelItem => item.Date)</h4>
+                    <p>@Html.ActionLink("Details", "Details", new { id = item.SubjectId }) </p>
+
+                </div>
+                <div class="col-md-4 column">
+                </div>
             </div>
-            <div class="col-lg-4">
-            </div>
-            <div class="col-lg-4">
-            </div>
-        </div>
-    }
-</div>
+            <hr class="hr_class" />
+        }
+        @section scripts{
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+                    $('.row').each(function () {
+                        var highestBox = 0;
+
+                        $(this).find('.column').each(function () {
+                            if ($(this).height() > highestBox) {
+                                highestBox = $(this).height();
+                            }
+                        })
+
+                        $(this).find('.column').height(highestBox);
+                    });
+
+
+                });
+            </script>
+        }
+    </div>

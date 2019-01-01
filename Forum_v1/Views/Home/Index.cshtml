@@ -1,84 +1,80 @@
-﻿@model IEnumerable<Forum_v1.Models.Category>
+﻿@*model IEnumerable<Forum_v1.Models.Category>*@
+@model Tuple<IEnumerable<Forum_v1.Models.Category>, IEnumerable<Forum_v1.Models.Subject>>
 @{
     ViewBag.Title = "Home Page";
 }
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <h1>LOgo</h1>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
         <div class="row">
             <div class="col-xs-6">
-                <h3 class="text_color">Members</h3>
+                @Html.ActionLink("Members", "Index", "Users", null, new { @class = "button_link text_color2" })
             </div>
             <div class="col-xs-6">
-                <h3 class="text_color">
-                    Calendar
-                </h3>
+                <a class="button_link text_color2" href="#">Calendar</a>
             </div>
         </div>
     </div>
 </div>
+<br />
+<hr class="hr_class" />
 <div class="row text_color" id="my_style">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2 class="colorr">Subiecte noi</h2>
     </div>
     <div class="col-md-8">
+       
         <div class="row">
-            <div class="col-xs-3">
-                <p class="description2"> lorem ipsum </p>
-            </div>
-            <div class="col-xs-3">
-                <p class="description2"> lorem ipsum </p>
-            </div>
-            <div class="col-xs-3">
-                <p class="description2"> lorem ipsum </p>
-            </div>
-            <div class="col-xs-3">
-                <p class="description2"> lorem ipsum </p>
-            </div>
+           
+           @{  int skip = 0;
+                var Subject = Model.Item2.Skip(skip).Take(4);
+                foreach (var item in Subject)
+                {
+                    <div class="col-xs-3">
+                        @Html.ActionLink(item.Title,"Details", "Subjects", new { id = item.SubjectId}, new { @class = "colorr"})
+                    </div>
+                }
+               skip = skip + 4;
+            }
         </div>
         <div class="row">
-            <div class="col-xs-3">
-                <p class="description2"> lorem ipsum </p>
-            </div>
-            <div class="col-xs-3">
-                <p class="description2"> lorem ipsum </p>
-            </div>
-            <div class="col-xs-3">
-                <p class="description2"> lorem ipsum </p>
-            </div>
-            <div class="col-xs-3">
-                <p> lorem ipsum </p>
-            </div>
 
+            @{
+                Subject = Model.Item2.Skip(skip).Take(4);
+                foreach (var item in Subject)
+                {
+                    <div class="col-xs-3">
+                        @Html.ActionLink(item.Title, "Details", "Subjects", new { id = item.SubjectId }, new { @class = "colorr" })
+                    </div>
+                }
+                skip = skip + 4;
+            }
         </div>
         <div class="row">
-            <div class="col-xs-3">
-                <p> lorem ipsum </p>
-            </div>
-            <div class="col-xs-3">
-                <p> lorem ipsum </p>
-            </div>
-            <div class="col-xs-3">
-                <p> lorem ipsum </p>
-            </div>
-            <div class="col-xs-3">
-                <p> lorem ipsum </p>
-            </div>
 
+            @{
+                Subject = Model.Item2.Skip(skip).Take(4);
+                foreach (var item in Subject)
+                {
+                    <div class="col-xs-3">
+                        @Html.ActionLink(item.Title, "Details", "Subjects", new { id = item.SubjectId }, new { @class = "colorr" })
+                    </div>
+                }
+            }
         </div>
     </div>
 </div>
 <hr class="hr_class" />
 
-@foreach (var item in Model)
+@foreach (var item in Model.Item1)
 {
     <div class="row text_color">
         <div class="col-md-5">
             <h3>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.ActionLink(item.Title, "Index", "Subjects", new { id = item.CategoryID }, new { @class = "text_color" })
             </h3>
             <p class="description">
                 @Html.DisplayFor(modelItem => item.Description)
@@ -96,7 +92,7 @@
         </div>
         <div class="col-md-5">
             <h3> last subject</h3>
-            <p class="description">by usename</p>
+            <p>by usename</p>
         </div>
     </div>
 }

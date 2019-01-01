@@ -15,8 +15,10 @@ namespace Forum_v1.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            
-            return View(db.Categories.ToList());
+            var top_subjects = db.Subjects.OrderByDescending(t => t.Date).Take(12);
+            var categories = db.Categories.ToList();
+            var tuple = new Tuple<IEnumerable<Category>, IEnumerable <Subject> >(categories, top_subjects);
+            return View(tuple);
         }
 
         public ActionResult About()

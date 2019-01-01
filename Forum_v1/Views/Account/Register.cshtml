@@ -5,16 +5,16 @@
                 ViewBag.Title = "Register";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2 class="text_color">@ViewBag.Title.</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" , enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
+    <h4 class="text_color">Create a new account.</h4>
     <hr />
     //@Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label text_color" })
         <div class="col-md-8">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
         </div>
@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label text_color" })
         <div class="col-md-8">
             @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
         </div>
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label text_color" })
         <div class="col-md-8">
             @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
         </div>
@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Adress, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Adress, new { @class = "col-md-2 control-label text_color" })
         <div class="col-md-8">
             @Html.TextBoxFor(m => m.Adress, new { @class = "form-control" })
         </div>
@@ -50,7 +50,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label text_color" })
         <div class="col-md-8">
             @Html.TextBoxFor(m => m.State, new { @class = "form-control" })
         </div>
@@ -60,7 +60,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label text_color" })
         <div class="col-md-8">
             @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
         </div>
@@ -69,7 +69,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label text_color" })
         <div class="col-md-8">
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
         </div>
@@ -78,7 +78,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label text_color" })
         <div class="col-md-8">
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
@@ -87,7 +87,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.UserPhoto, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.UserPhoto, new { @class = "col-md-2 control-label text_color" })
         <div class="col-md-8">
             <input type="file" name="UserPhoto" id="fileUpload" accept=".png,.jpg,.gif,.tif" />
         </div>
