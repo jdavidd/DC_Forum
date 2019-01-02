@@ -26,18 +26,18 @@
         <h2 class="colorr">Subiecte noi</h2>
     </div>
     <div class="col-md-8">
-       
+
         <div class="row">
-           
-           @{  int skip = 0;
+
+            @{ int skip = 0;
                 var Subject = Model.Item2.Skip(skip).Take(4);
                 foreach (var item in Subject)
                 {
                     <div class="col-xs-3">
-                        @Html.ActionLink(item.Title,"Details", "Subjects", new { id = item.SubjectId}, new { @class = "colorr"})
+                        @Html.ActionLink(item.Title, "Details", "Subjects", new { id = item.SubjectId }, new { @class = "colorr" })
                     </div>
                 }
-               skip = skip + 4;
+                skip = skip + 4;
             }
         </div>
         <div class="row">
@@ -67,12 +67,17 @@
         </div>
     </div>
 </div>
-<hr class="hr_class" />
-
-@foreach (var item in Model.Item1)
+<br />
+@if (this.User.IsInRole("Administrator"))
 {
+    <p>
+        @Html.ActionLink("Create new category", "Create","Categories", null, new { @class = "btn btn-info btn-block" })
+    </p>
+}@{ int i = 1;}
+@foreach (var item in Model.Item1)
+{    <hr class="hr_class" />
     <div class="row text_color">
-        <div class="col-md-5">
+        <div class="col-md-5 column">
             <h3>
                 @Html.ActionLink(item.Title, "Index", "Subjects", new { id = item.CategoryID }, new { @class = "text_color" })
             </h3>
@@ -81,18 +86,76 @@
             </p>
             @if (this.User.IsInRole("Administrator"))
             {
-                <p> @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID })</p>
-                <p> @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID }) </p>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <p> @Html.ActionLink("Edit", "Edit","Categories", new { id = item.CategoryID },null)</p>
+                    </div>
+                    <div class="col-xs-2">
+                        <p> @Html.ActionLink("Delete", "Delete","Categories", new { id = item.CategoryID },null) </p>
+                    </div>
+                </div>
             }
         </div>
-        <div class="col-md-2">
-            <p>
-                NR topics
-            </p>
+        <div class="col-md-2 column">
+            <h5 style="padding-top:50px;padding-left:15px;">
+                @ViewBag.count_subject
+            </h5>
         </div>
-        <div class="col-md-5">
-            <h3> last subject</h3>
-            <p>by usename</p>
+        <div class="col-md-5 column" id="ap@(item.CategoryID)">
+            <script>
+                $(document).ready(function () {
+                    $.ajax({
+                        type: 'GET',
+                        contentType: 'application/json;charset=utf-8',
+                        url: '@Url.Action("GetLastSubject","Home")',
+                        data: { "id":@item.CategoryID},
+                        dataType: 'json',
+                        async: false,
+                    }).done(function (data) {
+
+                        var node1 = document.createElement('a');
+                        var node2 = document.createElement('p');
+
+
+                        node1.href = "/Subjects/Index/" + data.SubjectID;
+                        node1.title = data.Title
+                       
+                        var textnode1 = document.createTextNode(data.Title);
+                        var textnode2 = document.createTextNode('Last subject by: ' + data.FirstName + ' ' + data.LastName + ' at ' + data.Date);
+
+                        node1.appendChild(textnode1);
+                        node2.appendChild(textnode2);
+
+                        document.getElementById("ap" + data.CategoryID).appendChild(node1);
+                        document.getElementById("ap" + data.CategoryID).appendChild(node2);
+
+                    }).fail(function (data) {
+                        console.log("Error"); 
+                    });
+                           
+                 });
+            </script>
         </div>
     </div>
+    i++;
+}
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.row').each(function () {
+                var highestBox = 0;
+
+                $(this).find('.column').each(function () {
+                    if ($(this).height() > highestBox) {
+                        highestBox = $(this).height();
+                    }
+                })
+
+                $(this).find('.column').height(highestBox);
+            });
+
+
+        });
+    </script>
 }
