@@ -1,11 +1,8 @@
-﻿@model Forum_v1.Models.Category
-
+﻿@model Forum_v1.Models.Subject
 @{
     ViewBag.Title = "Delete";
 }
-
-
-<h3 class="text_color">Are you sure you want to delete this?</h3>
+<h3 class="text_color">Doriti sa stergeti subiectul @ViewBag.SubTitle ?</h3>
 <div>
     <hr class="hr_class" />
     <div class="row">
@@ -20,19 +17,22 @@
     </div>
     <div class="row">
         <div class="col-md-2">
-            <p class="text_color"> Descriere </p>
+          <p class="text_color"> Descriere </p>
         </div>
         <div class="col-md-10 description">
             @Html.DisplayFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
+    
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div class="row">
+            <div class="col-md-2">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index", "Subjects", new { id = ViewBag.subject.CategoryID }, new { @class = "text_color" })
+            </div>
         </div>
     }
 </div>

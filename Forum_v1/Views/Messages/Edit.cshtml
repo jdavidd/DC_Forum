@@ -1,0 +1,45 @@
+﻿@model Forum_v1.Models.Message
+@{
+    ViewBag.Title = "Editeaza Mesajul";
+}
+
+<h2 class="text_color">Editare Mesaj</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <form method="post" action="/Messages/Edit/@ViewBag.message.MessageId">
+            @Html.HttpMethodOverride(HttpVerbs.Put)
+            <hr class="hr_class"/>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.MessageId)
+            @Html.HiddenFor(model => model.SubjectID)
+            @Html.HiddenFor(model => model.Date)
+            @Html.HiddenFor(model => model.UserId)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2 text_color" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
+    </div>
+}
+<div>
+    <p>
+        @{
+            @Html.ActionLink("Back to Chat", "Index", "Messages", new { id = ViewBag.message.SubjectID }, null)
+        }
+    </p>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

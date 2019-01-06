@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Forum_v1.Models.Message>
+@{
+    ViewBag.Title = "Index";
+}
+<h1 class="text_color">@ViewBag.Subject.Title</h1>
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-success">
+        <strong>@ViewBag.message</strong>
+    </div>
+}
+@if (this.User.IsInRole("Administrator") || this.User.IsInRole("Moderator") || this.User.IsInRole("User"))
+{
+    <p>
+        @{
+            @Html.ActionLink("Adauga mesaj", "Create", "Messages", new { id = ViewBag.SubjectId }, null)
+        }
+    </p>
+}
+<p>
+    @{
+        @Html.ActionLink("Back to Subjects", "Index", "Subjects", new { id = ViewBag.Subject.CategoryID }, null)
+    }
+</p>
+<div class="container-fluid">
+    @foreach (var item in Model)
+    {
+        <hr class="hr_class" />
+        <div class="row">
+            <div class="col-md-4">
+                <img src="@Url.Action( "Show", "Image", new { id = item.UserId } )" height="70" width="65" display="inline-block" />
+                <h5 class="description">Autor: @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)</h5>
+                <h5 class="description">data:@Html.DisplayFor(modelItem => item.Date)</h5>
+                @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Moderator") || this.User.IsInRole("User"))
+                {
+                    <p> @Html.ActionLink("Edit", "Edit", new { id = item.MessageId })       @Html.ActionLink("Delete", "Delete", new { id = item.MessageId }) </p>
+                }
+            </div>
+            <div class="col-md-8 ">
+                <p class="text_color">@Html.DisplayFor(modelItem => item.Text)</p>
+            </div>
+
+        </div>
+    }
+</div>
+

@@ -4,24 +4,33 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="row">
-    <div class="col-md-6">
-        <h1>LOgo</h1>
+<div class="row" style="margin-top:15px;">
+
+    <div class="col-md-8">
+        
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
+        <img  style="float:right;" src="@Url.Action("GetLogo","Home")" class="avatar img-responsive" alt="avatar">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
         <div class="row">
             <div class="col-xs-6">
-                @Html.ActionLink("Members", "Index", "Users", null, new { @class = "button_link text_color2" })
+                @Html.ActionLink("Members", "Index", "Users", null, new { @class = "btn btn-info" })
             </div>
             <div class="col-xs-6">
-                <a class="button_link text_color2" href="#">Calendar</a>
+                <a class="btn btn-info" href="#">Calendar</a>
             </div>
         </div>
+    </div>
+    <div class="col-md-10">
+
     </div>
 </div>
 <br />
 <hr class="hr_class" />
-<div class="row text_color" id="my_style">
+<div class="row text_color" id="my_style" style="margin-top:20xp;">
     <div class="col-md-4">
         <h2 class="colorr">Subiecte noi</h2>
     </div>
@@ -34,7 +43,7 @@
                 foreach (var item in Subject)
                 {
                     <div class="col-xs-3">
-                        @Html.ActionLink(item.Title, "Details", "Subjects", new { id = item.SubjectId }, new { @class = "colorr" })
+                        @Html.ActionLink(item.Title, "Index", "Messages", new { id = item.SubjectId }, new { @class = "colorr" })
                     </div>
                 }
                 skip = skip + 4;
@@ -117,11 +126,24 @@
                         var node2 = document.createElement('p');
 
 
-                        node1.href = "/Subjects/Index/" + data.SubjectID;
-                        node1.title = data.Title
-                       
+                        node1.href = "/Messages/Index/" + data.SubjectID;
+                        node1.title = data.Title;
+
+                        var date = new Date(parseInt(data.Date.substr(6)));
+                        var seconds = date.getSeconds();
+                        var minutes = date.getMinutes();
+                        if (minutes < 10)
+                            minutes = '0' + minutes;
+                        if (seconds < 10)
+                            seconds = '0' + seconds;
+                        var hour = date.getHours();
+                        var month = date.getUTCMonth() + 1;
+                        var day = date.getUTCDate();
+                        var year = date.getUTCFullYear();
+                        newdate = day + "/" + month + "/" + year + ' ' + hour + ':' + minutes + ':' + seconds;
+                        
                         var textnode1 = document.createTextNode(data.Title);
-                        var textnode2 = document.createTextNode('Last subject by: ' + data.FirstName + ' ' + data.LastName + ' at ' + data.Date);
+                        var textnode2 = document.createTextNode('Last subject by: ' + data.FirstName + ' ' + data.LastName + ' at ' + newdate);
 
                         node1.appendChild(textnode1);
                         node2.appendChild(textnode2);

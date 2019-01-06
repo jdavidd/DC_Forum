@@ -19,6 +19,10 @@ namespace Forum_v1.Controllers
         [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Index()
         {
+            if (TempData.ContainsKey("message"))
+            {
+                ViewBag.message = TempData["message"].ToString();
+            }
             return View(db.Categories.ToList());
         }
 
@@ -42,7 +46,16 @@ namespace Forum_v1.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
-            return View();
+            if (User.IsInRole("Administrator"))
+            {
+                return View();
+            }
+            else
+            {
+                ViewBag.message = "Trebuie sa fiti administrator pentru a crea categori!";
+                return Redirect("/Account/Login/");
+            }
+       
         }
 
         // POST: Categories/Create
@@ -57,6 +70,7 @@ namespace Forum_v1.Controllers
             {
                 db.Categories.Add(category);
                 db.SaveChanges();
+                TempData["message"] = "Categoria a fot creata cu succes!";
                 return RedirectToAction("Index");
             }
 
@@ -76,7 +90,16 @@ namespace Forum_v1.Controllers
             {
                 return HttpNotFound();
             }
-            return View(category);
+            if (User.IsInRole("Administrator"))
+            {
+                return View(category);
+            }
+            else
+            {
+                ViewBag.message = "Trebuie sa fiti administrator pentru a edita categori!";
+                return Redirect("/Account/Login/");
+            }
+            
         }
 
         // POST: Categories/Edit/5
@@ -91,9 +114,14 @@ namespace Forum_v1.Controllers
             {
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["message"] = "Categoria a fot editata cu succes!";
                 return RedirectToAction("Index");
             }
-            return View(category);
+            else
+            {
+                TempData["message"] = "Trebuie sa fiti administrator pentru a edita categoria!";
+                return View(category);
+            }
         }
 
         // GET: Categories/Delete/5
@@ -109,7 +137,15 @@ namespace Forum_v1.Controllers
             {
                 return HttpNotFound();
             }
-            return View(category);
+            if (User.IsInRole("Administrator"))
+            {
+                return View(category);
+            }
+            else
+            {
+                ViewBag.message = "Trebuie sa fiti administrator pentru a sterge categoria!";
+                return Redirect("/Account/Login/");
+            }
         }
 
         // POST: Categories/Delete/5
@@ -121,6 +157,7 @@ namespace Forum_v1.Controllers
             Category category = db.Categories.Find(id);
             db.Categories.Remove(category);
             db.SaveChanges();
+            TempData["message"] = "Categoria a fot stearsa cu succes!";
             return RedirectToAction("Index");
         }
 

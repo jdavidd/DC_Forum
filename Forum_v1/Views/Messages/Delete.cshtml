@@ -1,0 +1,27 @@
+﻿@model Forum_v1.Models.Message
+@{
+    ViewBag.Title = "Delete";
+}
+<h3 class="text_color">Doriti sa stergeti mesajul ?</h3>
+<div>
+    <hr class="hr_class" />
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text_color"> Text: </p>
+        </div>
+        <div class="col-md-10">
+           <p class="description"> @Html.DisplayFor(model => model.Text)</p>
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+
+        </div>
+        @Html.ActionLink("Back to Chat", "Index", "Messages", new { id = ViewBag.message.SubjectID }, null)
+    }
+</div>

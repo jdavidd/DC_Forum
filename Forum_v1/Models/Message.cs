@@ -10,7 +10,9 @@ namespace Forum_v1.Models
     {
         [Key]
         public int MessageId { get; set; }
+
         [Required]
+        [DataType(DataType.MultilineText)]
         public string Text { get; set; }
         [Required]
         public DateTime Date { get; set; }

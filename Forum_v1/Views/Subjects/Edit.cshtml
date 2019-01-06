@@ -3,30 +3,46 @@
     ViewBag.Title = "Editeaza Subiectul";
 }
 
-<h2>Editare Subiect</h2>
+<h2 class="text_color"> Editare Subiect</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <form method="post" action="/Subjects/Edit">
-            <h4>SUbiect de discutie</h4>
-            <hr />
+        <form method="post" action="/Subjects/Edit/@ViewBag.subject.SubjectId">
+            @Html.HttpMethodOverride(HttpVerbs.Put)
+            <hr class="hr_class" />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.SubjectId)
             @Html.HiddenFor(model => model.CategoryID)
+            @Html.HiddenFor(model => model.Date)
+            @Html.HiddenFor(model => model.UserId)
             <div class="form-group">
-                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2 text_color" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                 </div>
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <br /> <br />
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2 text_color" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
+                <br /> <br />
+
+                @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Moderator"))
+                {
+                    <div class="col-md-2">
+                        <i class="glyphicon glyphicon-th-list text_color"></i>
+                        <label class="control-label text_color">Selectati Categoria</label>
+                    </div>
+                    <div class="col-md-10">
+                        @Html.DropDownList("newCategory", new SelectList(ViewBag.ListaCategorii, "Value",
+                            "Text", (string)ViewBag.categorie), null, new { @class = "form-control" })
+                    </div>
+                }
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -36,9 +52,13 @@
         </form>
     </div>
 }
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        <p>
+            @{
+                @Html.ActionLink("Back to Subjects", "Index", "Subjects", new { id = ViewBag.subject.CategoryID }, null)
+            }
+        </p>
+    </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

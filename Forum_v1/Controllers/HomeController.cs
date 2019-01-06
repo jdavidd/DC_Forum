@@ -94,5 +94,18 @@ namespace Forum_v1.Controllers
 
             }
         }
+        public FileContentResult GetLogo()
+        {
+            string fileName = HttpContext.Server.MapPath(@"/Images/logo.png");
+            byte[] imageData = null;
+            FileInfo fileInfo = new FileInfo(fileName);
+            long imageFileLength = fileInfo.Length;
+            FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+            BinaryReader br = new BinaryReader(fs);
+            imageData = br.ReadBytes((int)imageFileLength);
+
+            return File(imageData, "image/png");
+
+        }
     }
 }

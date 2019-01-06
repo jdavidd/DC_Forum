@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Forum_v1.Models.Subject>
+@{
+    ViewBag.Title = "Results";
+}
+<h1 class="text_color">Rezultatele Cautarii dupa cuvantul @ViewBag.word</h1>
+
+<div class="container-fluid">
+    <hr />
+    <h3 class="text_color">Subiecte gasite</h3>
+    @if (ViewBag.Subiecte == null)
+    {
+        <p class="text_color">Nu a fost gasit niciun subiect pentru cuvantul:@ViewBag.word </p>
+    }
+    <hr />
+    @if (ViewBag.Subiecte != null)
+    {
+        foreach (var subiect in ViewBag.Subiecte)
+        {
+            <div class="row">
+                <div class="col-lg-4">
+                    <h2 class="text_color">@subiect.Title</h2>
+                    <h3 class="text_color">
+                        @{
+                            @Html.ActionLink("Vizualizeaza Discutiile", "Index", "Messages", new { id = subiect.SubjectId }, null)
+                        }
+                    </h3>
+                    <h4 class="text_color">@subiect.Description</h4>
+                    <h4 class="text_color">Creat de @subiect.User.FirstName @subiect.User.LastName</h4>
+                    <h4 class="text_color">La data: @subiect.Date</h4>
+                    @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Moderator") || this.User.IsInRole("User"))
+                    {
+                        <p> @Html.ActionLink("Edit", "Edit", "Subjects", new { id = subiect.SubjectId }, null)</p>
+                        <p> @Html.ActionLink("Delete", "Delete", "Subjects", new { id = subiect.SubjectId }, null) </p>
+                    }
+                </div>
+            </div>
+            <hr />
+        }
+    }
+    <h3 class="text_color">Utilizatori gasiti</h3>
+    @if (ViewBag.Useri == null)
+    {
+        <p class="text_color">Nu a fost gasit niciun utilizator pentru cuvantul:@ViewBag.word </p>
+    }
+    <hr />
+    @if (ViewBag.Useri != null)
+    {
+        foreach (var user in ViewBag.Useri)
+        {
+            <div class="row">
+                <div class="col-lg-1">
+                    @{
+                        var base64 = Convert.ToBase64String(user.UserPhoto);
+                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    }
+
+                    <img src="@imgSrc" height="70" width="65" />
+                </div>
+                <div class="col-lg-4">
+                    <h4 class="text_color"> @user.FirstName @user.LastName</h4>
+
+                </div>
+            </div>
+            <hr />
+        }
+    }
+    <h3 class="text_color">Mesaje ce contin cuvantul @ViewBag.word</h3>
+    @if (ViewBag.Mesaje == null)
+    {
+        <p class="text_color">Nu a fost gasit niciun mesaj pentru cuvantul:@ViewBag.word </p>
+    }
+    @if (ViewBag.Mesaje != null)
+    {
+        foreach (var mesaj in ViewBag.Mesaje)
+        {
+            <div class="row" style="border:1px solid white;">
+                <div class="col-lg-2 ">
+                    @{
+                        var base64 = Convert.ToBase64String(mesaj.User.UserPhoto);
+                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    }
+
+                    <img src="@imgSrc" height="70" width="65" />
+                    <h5 class="text_color">Autor: @mesaj.User.FirstName @mesaj.User.LastName</h5>
+                    <h5 class="text_color">data:@mesaj.Date</h5>
+                    @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Moderator") || this.User.IsInRole("User"))
+                    {
+                        <p> @Html.ActionLink("Edit", "Edit", "Messages", new { id = mesaj.MessageId }, null)       @Html.ActionLink("Delete", "Delete", "Messages", new { id = mesaj.MessageId }, null) </p>
+                    }
+                </div>
+                <div class="col-lg-7 ">
+                    <p class="text_color">@mesaj.Text</p>
+
+                </div>
+
+            </div>
+            <hr />
+        }
+    }
+</div>
+
