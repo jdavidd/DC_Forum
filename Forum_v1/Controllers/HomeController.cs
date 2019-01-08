@@ -15,6 +15,12 @@ namespace Forum_v1.Controllers
     public class HomeController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
+        public ActionResult About()
+        {
+            string currentTime = DateTime.Now.ToLongTimeString();
+            ViewBag.Message = "The current time is " + currentTime;
+            return View();
+        }
         public ActionResult Index()
         {
             var top_subjects = db.Subjects.OrderByDescending(t => t.Date).Take(12);
@@ -39,13 +45,6 @@ namespace Forum_v1.Controllers
                                CategoryID = subiect.CategoryID,
                                SubjectID = subiect.SubjectId,
                               }, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
         }
 
         public ActionResult Contact()

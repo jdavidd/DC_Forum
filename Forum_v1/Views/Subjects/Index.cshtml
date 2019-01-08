@@ -2,44 +2,106 @@
 @{
     ViewBag.Title = "Index";
 }
-<h1 class="text_color">@ViewBag.Category.Title</h1>
+
 @if (ViewBag.message != null)
 {
     <div class="alert alert-success">
         <strong>@ViewBag.message</strong>
     </div>
 }
-@if (this.User.IsInRole("Administrator") || this.User.IsInRole("Moderator") || this.User.IsInRole("User"))
-{
-    <p>
-        @{
-            @Html.ActionLink("Creaza Subiect Nou", "Create", "Subjects", new { id = ViewBag.CategoryID }, null)
-        }
-    </p>
-}
 
-    <div class="container-fluid">
-        @foreach (var item in Model)
-        {
-            <hr class="hr_class"/>
-            <div class="row">
-                <div class="col-lg-4">
-                    <h2>@Html.ActionLink(item.Title, "Index", "Messages", new { id = item.SubjectId }, new { @class = "text_color" })</h2>
-                    <h4 class="description">@Html.DisplayFor(modelItem => item.Description)</h4>
-                    <h4 class="description">Creat de @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)</h4>
-                    <h4 class="description">La data: @Html.DisplayFor(modelItem => item.Date)</h4>
-                    @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Moderator") || this.User.IsInRole("User"))
-                    {
-                        <div class="row">
-                            <div class="col-xs-1">
-                                <p> @Html.ActionLink("Edit", "Edit", new { id = item.SubjectId })</p>
-                            </div>
-                            <div class="col-xs-1">
-                                <p> @Html.ActionLink("Delete", "Delete", new { id = item.SubjectId }) </p>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        }
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 column">
+            <h1 class="text_color">@ViewBag.Category.Title</h1>
+        </div>
+        <div class="col-md-8 column">
+            @Html.DropDownList(
+             "url",
+             new SelectList(new[]
+             {
+                 new SelectListItem{Text = "data", Value=Url.Action("Index","Subjects", new { id = ViewBag.CategoryID, page = 0, sortare = 0 })},
+                 new SelectListItem{Text = "title", Value=Url.Action("Index","Subjects", new { id = ViewBag.CategoryID, page = 0, sortare = 1 })},
+                 new SelectListItem{Text = "author", Value=Url.Action("Index","Subjects", new { id = ViewBag.CategoryID, page = 0, sortare = 2 })},
+                 new SelectListItem{Text = "Descending data", Value=Url.Action("Index","Subjects", new { id = ViewBag.CategoryID, page = 0, sortare = 3 })}
+             }, "Value", "Text"),
+             "- Sort Subjects By -",
+             new { @id = "urlddl" , @class = "btn btn-info dropdown"}
+            )
+            <script>
+                $(function () {
+                    $('#urlddl').change(function () {
+                        var url = $(this).val();
+                        if (url != null && url != '') {
+                            window.location.href = url;
+                        }
+                    });
+                });
+            </script>
+        </div>
     </div>
+    <div class="row">
+        <div class="col-md-9 column">
+            @for (int i = 1; i <= ViewBag.NrPages; i++)
+            {
+                <input class="btn btn-info colorr" id ="link" type="button" title="Page" value="@i" onclick="location.href='@Url.Action("Index", "Subjects", new { id = ViewBag.CategoryID, page=(i-1),sortare=ViewBag.tipSort })'" />
+            }
+            <input class="btn btn-info" id="link" type="button" title="Page" value=">" onclick="location.href='@Url.Action("Index", "Subjects", new { id = ViewBag.CategoryID, page=(ViewBag.pagina+1),sortare=ViewBag.tipSort })'" />
+        </div>
+        <div class="col-md-3 column">
+            @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Moderator") || this.User.IsInRole("User"))
+            {
+                <p class="btn btn-info"  style="float:right;">
+                    @{
+                        @Html.ActionLink("Creaza Subiect Nou", "Create", "Subjects", new { @id = ViewBag.CategoryID }, new { @class = "colorr" })
+                    }
+                </p>
+            }
+        </div>
+
+    </div>
+    @foreach (var item in Model)
+    {
+        <hr class="hr_class" />
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>@Html.ActionLink(item.Title, "Index", "Messages", new { id = item.SubjectId }, new { @class = "text_color" })</h2>
+                <h4 class="description">@Html.DisplayFor(modelItem => item.Description)</h4>
+                <h4 class="description">Creat de @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)</h4>
+                <h4 class="description">La data: @Html.DisplayFor(modelItem => item.Date)</h4>
+                @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Moderator") || this.User.IsInRole("User"))
+                {
+                    <div class="row">
+                        <div class="col-xs-1">
+                            <p> @Html.ActionLink("Edit", "Edit", new { id = item.SubjectId })</p>
+                        </div>
+                        <div class="col-xs-1">
+                            <p> @Html.ActionLink("Delete", "Delete", new { id = item.SubjectId }) </p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.row').each(function () {
+                var highestBox = 0;
+
+                $(this).find('.column').each(function () {
+                    if ($(this).height() > highestBox) {
+                        highestBox = $(this).height();
+                    }
+                })
+
+                $(this).find('.column').height(highestBox);
+            });
+
+
+        });
+    </script>
+}
