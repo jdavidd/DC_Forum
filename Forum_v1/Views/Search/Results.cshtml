@@ -2,16 +2,16 @@
 @{
     ViewBag.Title = "Results";
 }
-<h1 class="text_color">Rezultatele Cautarii dupa cuvantul @ViewBag.word</h1>
+<h1 class="text_color">Rezultatele cautarii dupa cuvantul @ViewBag.word</h1>
 
 <div class="container-fluid">
-    <hr />
-    <h3 class="text_color">Subiecte gasite</h3>
+
+    <h1 class="text_color">Subiecte gasite</h1>
     @if (ViewBag.Subiecte == null)
     {
         <p class="text_color">Nu a fost gasit niciun subiect pentru cuvantul:@ViewBag.word </p>
     }
-    <hr />
+    <hr class="hr_class" />
     @if (ViewBag.Subiecte != null)
     {
         foreach (var subiect in ViewBag.Subiecte)
@@ -34,10 +34,10 @@
                     }
                 </div>
             </div>
-            <hr />
+            <hr class="hr_class"/>
         }
     }
-    <h3 class="text_color">Utilizatori gasiti</h3>
+    <h1 class="text_color">Utilizatori gasiti</h1>
     @if (ViewBag.Useri == null)
     {
         <p class="text_color">Nu a fost gasit niciun utilizator pentru cuvantul:@ViewBag.word </p>
@@ -61,10 +61,10 @@
 
                 </div>
             </div>
-            <hr />
+            <hr class="hr_class"/>
         }
     }
-    <h3 class="text_color">Mesaje ce contin cuvantul @ViewBag.word</h3>
+    <h1 class="text_color">Mesaje ce contin cuvantul @ViewBag.word</h1>
     @if (ViewBag.Mesaje == null)
     {
         <p class="text_color">Nu a fost gasit niciun mesaj pentru cuvantul:@ViewBag.word </p>

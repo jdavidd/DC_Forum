@@ -71,7 +71,7 @@ namespace Forum_v1.Controllers
                 db.Categories.Add(category);
                 db.SaveChanges();
                 TempData["message"] = "Categoria a fot creata cu succes!";
-                return RedirectToAction("Index");
+                return RedirectToAction("/Home/Index");
             }
 
             return View(category);

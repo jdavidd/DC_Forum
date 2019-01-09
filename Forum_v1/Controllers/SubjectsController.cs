@@ -58,7 +58,8 @@ namespace Forum_v1.Controllers
                 subiecte = subiecte.OrderByDescending(o => o.Date).ToList();
                 ViewBag.tipSort = 3;
             }
-
+            if (subiectele.Count() == 0)
+                return View(subiecte.ToList());
             if ((page * 10) + 9 <= subiectele.Count() - 1)
                 return View(subiecte.ToList().GetRange(page * 10, 10));
             else

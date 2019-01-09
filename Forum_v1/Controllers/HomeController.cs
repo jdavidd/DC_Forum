@@ -37,8 +37,17 @@ namespace Forum_v1.Controllers
             Category Category = db.Categories.Find(id);
             ViewBag.Category = Category;
             var subiecte = from Subject in Category.Subjects select Subject;
+            var s = subiecte.OrderByDescending(t => t.Date).Count();
+
+            if (s == 0)
+            {
+                return Json(new { Count = 0 }, JsonRequestBehavior.AllowGet);
+            }
+            else {
             var subiect = subiecte.OrderByDescending(t => t.Date).First();
-            return Json( new { Title = subiect.Title,
+            return Json( new {
+                               Count = 1,
+                               Title = subiect.Title,
                                FirstName = subiect.User.FirstName,
                                LastName = subiect.User.LastName,
                                Date = subiect.Date,
@@ -46,6 +55,7 @@ namespace Forum_v1.Controllers
                                SubjectID = subiect.SubjectId,
                                UserID = subiect.UserId
                               }, JsonRequestBehavior.AllowGet);
+            }
         }
         public JsonResult GetNumberOfSubjects(int id)
         {
