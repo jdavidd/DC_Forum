@@ -36,6 +36,27 @@ namespace Forum_v1.Controllers
 
             return View(NewUser);
         }
+        public ActionResult UserShow(string id)
+        {
+            string userId = User.Identity.GetUserId();
+            ApplicationUser UserE = context.Users.FirstOrDefault(x => x.Id == id);
+            UserEdit NewUser = new UserEdit();
+
+            NewUser.Email = UserE.Email;
+            NewUser.FirstName = UserE.FirstName;
+            NewUser.LastName = UserE.LastName;
+            NewUser.Adress = UserE.Adress;
+            NewUser.City = UserE.City;
+            NewUser.State = UserE.State;
+            NewUser.UserPhoto = UserE.UserPhoto;
+
+            if (TempData.ContainsKey("message"))
+            {
+                ViewBag.message = TempData["message"].ToString();
+            }
+            ViewBag.id = id;
+            return View(NewUser);
+        }
 
         public ActionResult Edit()
         {

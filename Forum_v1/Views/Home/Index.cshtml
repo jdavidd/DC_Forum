@@ -30,7 +30,7 @@
 </div>
 <br />
 <hr class="hr_class" />
-<div class="row text_color" id="my_style" style="margin-top:20xp;">
+<div class="row text_color" id="my_style" style="margin-top:20px;">
     <div class="col-md-4">
         <h2 class="colorr">Subiecte noi</h2>
     </div>
@@ -105,10 +105,31 @@
                 </div>
             }
         </div>
-        <div class="col-md-2 column">
-            <h5 style="padding-top:50px;padding-left:15px;">
-                @ViewBag.count_subject
-            </h5>
+        <div class="col-md-2 column" id="ac@(item.CategoryID)">
+            <script>
+                
+                $(document).ready(function () {
+                    $.ajax({
+                        type: 'GET',
+                        contentType: 'application/json;charset=utf-8',
+                        url: '@Url.Action("GetNumberOfSubjects","Home")',
+                        data: { "id":@item.CategoryID},
+                        dataType: 'json',
+                        async: false,
+                    }).done(function (data) {
+
+                        var node2 = document.createElement('p');
+                        var textnode2 = document.createTextNode(data.Count + ' subjects');
+                        node2.appendChild(textnode2);
+                        document.getElementById("ac" + @item.CategoryID).appendChild(node2);
+
+                    }).fail(function (data) {
+                        console.log("Error"); 
+                    });
+                           
+                 });
+
+            </script>
         </div>
         <div class="col-md-5 column" id="ap@(item.CategoryID)">
             <script>
@@ -124,10 +145,13 @@
 
                         var node1 = document.createElement('a');
                         var node2 = document.createElement('p');
+                        var node3 = document.createElement('a');
 
 
                         node1.href = "/Messages/Index/" + data.SubjectID;
                         node1.title = data.Title;
+
+                        node3.href = "/UserEdit/UserShow/" + data.UserID;
 
                         var date = new Date(parseInt(data.Date.substr(6)));
                         var seconds = date.getSeconds();
@@ -143,13 +167,15 @@
                         newdate = day + "/" + month + "/" + year + ' ' + hour + ':' + minutes + ':' + seconds;
                         
                         var textnode1 = document.createTextNode(data.Title);
-                        var textnode2 = document.createTextNode('Last subject by: ' + data.FirstName + ' ' + data.LastName + ' at ' + newdate);
-
+                        var textnode2 = document.createTextNode(newdate);
+                        var textnode3 = document.createTextNode('Last subject by: ' + data.FirstName + ' ' + data.LastName)
                         node1.appendChild(textnode1);
                         node2.appendChild(textnode2);
+                        node3.appendChild(textnode3);
 
                         document.getElementById("ap" + data.CategoryID).appendChild(node1);
                         document.getElementById("ap" + data.CategoryID).appendChild(node2);
+                        document.getElementById("ap" + data.CategoryID).appendChild(node3);
 
                     }).fail(function (data) {
                         console.log("Error"); 

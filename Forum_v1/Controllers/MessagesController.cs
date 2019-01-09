@@ -53,10 +53,14 @@ namespace Forum_v1.Controllers
                 //Debug.WriteLine("A ajuns unde trebuie");
                 db.Messages.Add(message);
                 db.SaveChanges();
+                return Redirect("/Messages/Index/" + message.SubjectID);
 
             }
-
-            return Redirect("/Messages/Index/" + message.SubjectID);
+            else
+            {
+                ViewBag.SubjectId = message.SubjectID;
+                return View("Create");
+            }
         }
         [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Edit(int? id)

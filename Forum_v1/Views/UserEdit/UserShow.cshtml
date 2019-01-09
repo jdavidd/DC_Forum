@@ -1,0 +1,83 @@
+﻿
+@model Forum_v1.Models.UserEdit
+@{
+    ViewBag.Title = "Index";
+}
+@if (TempData.ContainsKey("message"))
+{
+    <h3 class="alert alert-info" role="alert">@ViewBag.message</h3>
+}
+
+<div class="row" style="margin-top:10px">
+    <div class="col-sm-10 text_color"><h3>@Html.DisplayFor(m => m.Email)</h3></div>
+    <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>
+</div>
+<div class="row">
+    <div class="col-sm-3">
+        <!--left col-->
+
+        <div class="text-center">
+            <img src="@Url.Action("GetPhoto","Home", new { id = ViewBag.id})" class="avatar img-circle img-thumbnail" alt="avatar">
+        </div><br>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="wh">
+                <p class="text_colorr">Website</p>
+            </div>
+            <div class="panel-body">
+                <a href="http://bootnipets.com">bootnipets.com</a>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="wh">
+                <p class="text_colorr">Social Media</p>
+            </div>
+            <div class="panel-body">
+                <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
+            </div>
+        </div>
+
+    </div><!--/col-3-->
+    <div class="col-sm-9">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" style="color:#fff " id="wh" href="#home">Home</a></li>
+        </ul>
+
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="home">
+                <div class="col-xs-6">
+                    <h4 class="text_color"> @Html.Label("FirstName", "First Name") </h4>
+                    <p class="text_colorr"> @Html.DisplayFor(m => m.FirstName) </p>
+                </div>
+
+
+                <div class="col-xs-6">
+                    <h4 class="text_color">  @Html.Label("LastName", "Last Name") </h4>
+
+                    <p class="text_colorr">@Html.DisplayFor(m => m.LastName)</p>
+                </div>
+
+
+                <div class="col-xs-6">
+                    <h4 class="text_color"> @Html.Label("Adress", "Adress") </h4>
+                    <p class="text_colorr"> @Html.DisplayFor(m => m.Adress)</p>
+                </div>
+
+
+                <div class="col-xs-6">
+                    <h4 class="text_color"> @Html.Label("City", "City") </h4>
+                    <p class="text_colorr"> @Html.DisplayFor(m => m.City)</p>
+                </div>
+
+                <div class="col-xs-6">
+                    <h4 class="text_color">  @Html.Label("State", "State") </h4>
+                    <p class="text_colorr"> @Html.DisplayFor(m => m.State) </p>
+                </div>
+            </div><!--/tab-pane-->
+        </div><!--/tab-content-->
+
+    </div><!--/col-9-->
+</div><!--/row-->

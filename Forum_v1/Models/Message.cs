@@ -11,7 +11,7 @@ namespace Forum_v1.Models
         [Key]
         public int MessageId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Mesajul nu poate fi gol")]
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }
         [Required]

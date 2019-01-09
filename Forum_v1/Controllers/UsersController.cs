@@ -60,11 +60,10 @@ namespace Forum_v1.Controllers
                 ApplicationDbContext context = new ApplicationDbContext();
                 var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
                 var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-                if (TryUpdateModel(user))
-                {
+               // if (TryUpdateModel(user))
+               //{
                     user.UserName = newData.UserName;
                     user.Email = newData.Email;
-                    user.PhoneNumber = newData.PhoneNumber;
 
                     var roles = from role in db.Roles select role;
                     foreach (var role in roles)
@@ -78,7 +77,7 @@ namespace Forum_v1.Controllers
 
                     db.SaveChanges();
 
-                }
+                //}
                 return RedirectToAction("Index");
 
             }
